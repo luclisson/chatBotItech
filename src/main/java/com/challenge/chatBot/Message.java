@@ -4,13 +4,21 @@ public class Message {
     Integer id;
     String message;
     String author;
-
-    public Message(String message, String author, Integer id) {
+    String type;
+    public Message(String message, String author, Integer id, String type) {
         this.message = message;
         this.id = id;
         this.author = author;
+        this.type = type;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public Integer getId() {
         return id;
