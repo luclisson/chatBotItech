@@ -20,7 +20,7 @@ submidBtn.addEventListener("click", function () {
             method: "POST",
             body: JSON.stringify({
                 "message": textField.value,
-                "author": "me",
+                "author": "user",
                 "type": type,
                 "id": counter
             }),

@@ -47,6 +47,4 @@ sendBtn.addEventListener("click", function () {
     textField.value = ""; // to clear text field again
     createMessage(id, userInput,"user","default");
     id++;
-
-
 })
