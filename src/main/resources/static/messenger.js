@@ -4,16 +4,17 @@ const sendBtn = document.getElementById("sendButton");
 const textField = document.getElementById("messageInput");
 const bugParagraphEL = document.getElementById("title-p");
 //fetching title from index page
-fetch(`http://localhost:8080/messages/1`,{
+fetch(`http://localhost:8080/messages/2`,{ //only 2 because im sending a test msg to the db on id=1
     method: "GET"
 }).then((response) => {
     return response.json();
 }).then((data) => {
+    console.log(data.message);
     bugParagraphEL.innerHTML = data.message;
 })
 
 
-function createMessage(id, message,author, type) {
+function createMessage(message,author, type) {
     const newMessageContainer = document.createElement("div");
     container.appendChild(newMessageContainer);
     newMessageContainer.classList.add("message-container");
@@ -28,10 +29,10 @@ function createMessage(id, message,author, type) {
     }
     newMessageDiv.innerText = message;
 
-    fetch(`http://localhost:8080/createMessage/${id}`,{
+    fetch(`http://localhost:8080/createMessage/`,{
         method: "POST",
         body: JSON.stringify({
-            "id": id,
+            //"id": id,
             "message": message,
             "author": author,
             "type": type
@@ -41,10 +42,10 @@ function createMessage(id, message,author, type) {
         }
     })
 }
-let id = 2; // id 1 is already in use because of title, in the future json reader +1
+
 sendBtn.addEventListener("click", function () {
     const userInput = textField.value;
     textField.value = ""; // to clear text field again
-    createMessage(id, userInput,"user","default");
-    id++;
+    createMessage(userInput,"user","default");
+
 })

@@ -4,7 +4,7 @@ const textField  = document.getElementById("text-field");
 const checkBox = document.getElementById("check-box");
 //default values
 let micActive = false;
-let counter =2; //first id is used for title in index page
+let counter =1; //counts the amount of messages created at the frontend (not really necessary anymore, but adds title type to the first message)
                             // later this needs to be read from json to start at already existing messages
 let type = "default";
 submidBtn.addEventListener("click", function () {
@@ -16,13 +16,13 @@ submidBtn.addEventListener("click", function () {
         }else{
             type = "default";
         }
-        fetch(`http://localhost:8080/createMessage/${counter}`,{
+        fetch(`http://localhost:8080/createMessage/`,{
             method: "POST",
             body: JSON.stringify({
                 "message": textField.value,
                 "author": "user",
                 "type": type,
-                "id": counter
+
             }),
             headers: {
                 "Content-Type": "application/json; charset=UTF-8",
@@ -31,6 +31,12 @@ submidBtn.addEventListener("click", function () {
         counter++;
         textField.value = ""; //empty the text field
     }
+    //trying to call get messages again to fill the list
+    fetch("http://localhost:8080/messages",{
+        method: "GET"
+    })
+
+    //
     fetch(`http://localhost:8080/redirectToMessenger`, {
         redirect: 'follow'
     })
