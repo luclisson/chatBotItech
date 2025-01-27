@@ -39,7 +39,6 @@ public class FrontendController {
     }
     @GetMapping(path = "/messages")
     public List<Message> getMessages2() {
-        //return json list object in string format. this ensures that the frontend or other potential request can use the returned value
         return messageJpaRepository.retrieveAllEntities();
     }
 }
