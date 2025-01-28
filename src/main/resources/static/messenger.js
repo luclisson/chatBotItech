@@ -1,3 +1,8 @@
+import OpenAI from "openai";
+const openai = new OpenAI({
+    apiKey: "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"
+});
+
 //defining html elements
 const container = document.getElementById("container");
 const sendBtn = document.getElementById("sendButton");
@@ -16,12 +21,12 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 async function displayLoading(times, htmlElement) {
-    paragraph = document.createElement("p");
+    let paragraph = document.createElement("p");
     htmlElement.appendChild(paragraph);
     for (let i = 0; i < times; i++) {
         for(let i = 0; i < 4; i++) {
-            paragraph.innerHTML = paragraph.innerHTML + ". "
-            await sleep(200)
+            paragraph.innerHTML = paragraph.innerHTML + ". ";
+            await sleep(100)
         }
         paragraph.innerHTML = "";
     }
@@ -58,17 +63,35 @@ function createMessage(message,author, type) {
 
     //create response, display it and add it to the db
 }
-
+async function generateChatbotResponse(prompt) {
+    let content = "you are a helpful chatbot of the company bugland. the company offers cleaning bots";
+    try{
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o",
+            messages: [
+                { role: "assistant", content: content },
+                { role: "user", content: prompt },
+            ],
+            store: true,
+        });
+        console.log("-----");
+        console.log(completion.choices[0].message.content);
+    }
+    catch(err){
+        console.log(err);
+    }
+}
 
 sendBtn.addEventListener("click", async function () {
     const userInput = textField.value;
     textField.value = ""; // to clear text field again
     createMessage(userInput, "user", "default");
     //add wait to ensure real response from ki is found
-    div = document.createElement("div");
+    let div = document.createElement("div");
     container.appendChild(div);
     await displayLoading(5, div)
     //get chatBot response
+    await generateChatbotResponse(userInput)
     createMessage("this is a static response", "chatBot", "default");
 
 })

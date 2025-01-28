@@ -2,7 +2,6 @@ package com.challenge.chatBot.message.jpa;
 
 import com.challenge.chatBot.message.Message;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.LockModeType;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -19,7 +18,6 @@ public class MessageJpaRepository {
         entityManager.merge(message);
     }
 
-
     public Message retrieveEntityById(int id) {
         return entityManager.find(Message.class, id);
     }
@@ -29,7 +27,4 @@ public class MessageJpaRepository {
         Query query = entityManager.createQuery("select m from Message m WHERE m.id>1"); //equal to SELECT * from MESSAGE because i have to prefill the db with a value which has id = 1
         return (List<Message>) query.getResultList();
     }
-
-
-
 }
