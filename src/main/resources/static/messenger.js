@@ -1,7 +1,5 @@
 import OpenAI from "openai";
-const openai = new OpenAI({
-
-});
+const openai = new OpenAI({});
 
 //defining html elements
 const container = document.getElementById("container");
