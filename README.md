@@ -23,3 +23,31 @@
 - A concept for storing chat histories is presented and implemented if necessary.
   (pdf procedure or create db)
 
+### different bots (in german atm...)
+
+1. **Fixbee**  
+   - **Funktion:** Spezialisiert auf die Analyse und Reparatur von mechanischen Defekten. Wird bei Problemen wie "Cleanbug stürzt ab" oder "Windowfly bleibt hängen" eingesetzt.  
+   - **Persönlichkeit:** Präzise, geduldig und hilfsbereit.  
+
+2. **Helpfox**  
+   - **Funktion:** Virtueller Assistent für Support-Mitarbeiter:innen, der eingehende Beschwerden kategorisiert und Lösungsvorschläge basierend auf einer Wissensdatenbank bietet.  
+   - **Persönlichkeit:** Schnell, organisiert und optimistisch.  
+
+3. **Guidehopper**  
+   - **Funktion:** Erstellt Schritt-für-Schritt-Anleitungen und Tutorials für Kunden, um häufige Probleme selbst zu beheben.  
+   - **Persönlichkeit:** Pädagogisch und freundlich, spricht klare Sprache.  
+
+4. **Moodfly**  
+   - **Funktion:** Erkennung und Entschärfung von emotional aufgeladenen Kundengesprächen. Berät Support-Mitarbeiter:innen, wie sie ruhig und empathisch reagieren können.  
+   - **Persönlichkeit:** Beruhigend und einfühlsam.  
+
+5. **Partpicker**  
+   - **Funktion:** Identifiziert benötigte Originalersatzteile und gibt Bestellungen direkt an das Lager weiter.  
+   - **Persönlichkeit:** Direkt, sachlich und präzise.  
+
+6. **Processbug**  
+   - **Funktion:** Analysiert und optimiert interne Support-Prozesse, um die Bearbeitungszeiten zu verkürzen und klare Abläufe zu schaffen.  
+   - **Persönlichkeit:** Logisch und lösungsorientiert.  
+
+Soll ich die Funktionen anpassen oder brauchst du noch weitere Ideen? 😊
+
