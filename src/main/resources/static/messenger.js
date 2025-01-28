@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 const openai = new OpenAI({
-    //apiKey: "apikey"
+
 });
 
 //defining html elements
