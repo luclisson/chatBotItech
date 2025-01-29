@@ -4,10 +4,23 @@ const textField  = document.getElementById("text-field");
 const checkBox = document.getElementById("check-box");
 //default values
 let micActive = false;
-let counter =1; //counts the amount of messages created at the frontend (not really necessary anymore, but adds title type to the first message)
-                            // later this needs to be read from json to start at already existing messages
-let type = "default";
+
+
 //functions
+function fetchCreateMessage(message,author,type){
+    fetch(`http://localhost:8080/createMessage/`,{
+        method: "POST",
+        body: JSON.stringify({
+            "message": message,
+            "author": author,
+            "type": type,
+
+        }),
+        headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+        }
+    })
+}
 function checkDevice(number){
     let ending = ""
     for(let i = number.length-2; i < number.length; i++){
@@ -15,24 +28,23 @@ function checkDevice(number){
 
     }
     switch (ending){
-        //in a bigger application you could validate further, for this basic case i think a console.log is enough
         case "01":
-            console.log("valid device found");
+            fetchCreateMessage("Cleanbug", "system", "required")
             break;
         case "02":
-            console.log("valid device found");
+            fetchCreateMessage("WindowFly", "system", "required")
             break;
         case "03":
-            console.log("valid device found");
+            fetchCreateMessage("GardenBeetle", "system", "required")
             break;
         case "04":
-            console.log("valid device found");
+            fetchCreateMessage("AirMite", "system", "required")
             break;
         case "05":
-            console.log("valid device found");
+            fetchCreateMessage("BugGuard", "system", "required")
             break;
         case "06":
-            console.log("valid device found");
+            fetchCreateMessage("FridgeAnt", "system", "required")
             break;
         default:
             console.log("invalid device");
@@ -80,27 +92,7 @@ function redirectToMessenger(){
 function sendMessage(){
     //post request message
     if (textField.value != "") {
-        //handle exception of white spaces later
-        console.log(textField.value);
-        if (counter === 1){
-            type = "title"
-        }else{
-            type = "default";
-        }
-        fetch(`http://localhost:8080/createMessage/`,{
-            method: "POST",
-            body: JSON.stringify({
-                "message": textField.value,
-                "author": "user",
-                "type": type,
-
-            }),
-            headers: {
-                "Content-Type": "application/json; charset=UTF-8",
-            }
-        })
-        counter++;
-        //textField.value = ""; //empty the text field
+        fetchCreateMessage(textField.value, "user","title")
     }
 
 }

@@ -63,4 +63,19 @@ public class FrontendController {
         ChatResponse response = openAiChatModel.call(prompt);
         return response.getResult().getOutput().getContent();
     }
+    @GetMapping(path = "/getSummary")
+    public String getSummary() {
+        List<Message> allMessages = messageJpaRepository.retrieveAllEntities();
+        String request = """
+                write a summary for a future employee in the following format:
+                Bot: "bot"\s
+                Serial number: "serial number"\s
+                Problem: "summarize both the messages and what provided solutions didn't work 
+                (you will find material for the summary below in json like format)"
+                """;
+
+        Prompt  prompt = new Prompt(request + allMessages);
+        ChatResponse response = openAiChatModel.call(prompt);
+        return response.getResult().getOutput().getContent();
+    }
 }

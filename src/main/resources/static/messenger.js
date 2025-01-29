@@ -1,16 +1,25 @@
 const container = document.getElementById("container");
 const sendBtn = document.getElementById("sendButton");
+const humanSupportBtn = document.getElementById("employeeButton");
 const textField = document.getElementById("messageInput");
-const bugParagraphEL = document.getElementById("title-p");
+const numberParagraphEL = document.getElementById("serialNumber-p");
+const botParagraphEL = document.getElementById("bot-p");
 //fetching title from index page
+fetch(`http://localhost:8080/messages/3`,{ //only 2 because im sending a test msg to the db on id=1
+    method: "GET"
+}).then((response) => {
+    return response.json();
+}).then((data) => {
+    numberParagraphEL.innerHTML = "detected serial number: " + data.message;
+})
 fetch(`http://localhost:8080/messages/2`,{ //only 2 because im sending a test msg to the db on id=1
     method: "GET"
 }).then((response) => {
     return response.json();
 }).then((data) => {
-    console.log(data.message);
-    bugParagraphEL.innerHTML = data.message;
+    botParagraphEL.innerHTML = "detected bot from serial number: " + data.message;
 })
+//functions
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -59,7 +68,6 @@ function createMessage(message,author, type) {
 }
 function generateChatbotResponse(prompt) {
     prompt = prompt.replaceAll(" ", "-");
-    console.log(prompt);
     return fetch(`http://localhost:8080/genResponse/${prompt}`,{
         method: "GET"
     }).then(response => {
@@ -79,4 +87,16 @@ sendBtn.addEventListener("click", async function () {
     //get chatBot response
     let chatBotResponse  = await generateChatbotResponse(userInput);
     createMessage(chatBotResponse, "chatBot", "default");
+})
+humanSupportBtn.addEventListener("click", async function () {
+    console.log("human support");
+    let summary = await fetch(`http://localhost:8080/getSummary`, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    })
+    console.log(summary);
+    //create text doc with summary (pdf would be cleaner)
+    //send this doc to a free employee
+    //redirect to end page and waiting time countdown
 })

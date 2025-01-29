@@ -70,6 +70,10 @@ input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+#employeeButton{
+    margin-left: 45px;
+    background-color: lightseagreen;
+}
 
 button {
     padding: 10px 15px;
