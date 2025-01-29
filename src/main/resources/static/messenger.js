@@ -1,7 +1,3 @@
-import OpenAI from "openai";
-const openai = new OpenAI({});
-
-//defining html elements
 const container = document.getElementById("container");
 const sendBtn = document.getElementById("sendButton");
 const textField = document.getElementById("messageInput");
@@ -61,23 +57,15 @@ function createMessage(message,author, type) {
 
     //create response, display it and add it to the db
 }
-async function generateChatbotResponse(prompt) {
-    let content = "you are a helpful chatbot of the company bugland. the company offers cleaning bots";
-    try{
-        const completion = await openai.chat.completions.create({
-            model: "gpt-4o",
-            messages: [
-                { role: "assistant", content: content },
-                { role: "user", content: prompt },
-            ],
-            store: true,
-        });
-        console.log("-----");
-        console.log(completion.choices[0].message.content);
-    }
-    catch(err){
-        console.log(err);
-    }
+function generateChatbotResponse(prompt) {
+    prompt = prompt.replaceAll(" ", "-");
+    console.log(prompt);
+    return fetch(`http://localhost:8080/genResponse/${prompt}`,{
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    })
+
 }
 
 sendBtn.addEventListener("click", async function () {
@@ -87,9 +75,8 @@ sendBtn.addEventListener("click", async function () {
     //add wait to ensure real response from ki is found
     let div = document.createElement("div");
     container.appendChild(div);
-    await displayLoading(5, div)
+    await displayLoading(5, div);
     //get chatBot response
-    await generateChatbotResponse(userInput)
-    createMessage("this is a static response", "chatBot", "default");
-
+    let chatBotResponse  = await generateChatbotResponse(userInput);
+    createMessage(chatBotResponse, "chatBot", "default");
 })
