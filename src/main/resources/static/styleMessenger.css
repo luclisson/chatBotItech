@@ -3,24 +3,47 @@
     margin: 0;
     padding: 0;
 }
+
 body, html {
     height: 100%;
     display: flex;
     flex-direction: column;
     font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Soft background */
+    color: #333;
 }
 
 #ticket-header {
     text-align: center;
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    border-bottom: 3px solid #0056b3;
 }
 
-body {
-    background-color: #f0f0f0; /* Light gray background */
-    margin: 0;
-    padding: 0;
+#ticket-header h1 {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+#ticket-header p {
+    font-size: 14px;
+}
+
+#serial-bot-info {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #e9ecef;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    font-weight: bold;
+}
+
+#serialNumber-p, #bot-p {
+    font-size: 14px;
+    color: white;
+    font-style: oblique;
 }
 
 #container {
@@ -30,56 +53,86 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #fff;
+    background-color: white;
     border-left: 5px solid #ddd;
     border-right: 5px solid #ddd;
-    max-height: calc(100vh - 70px);
+    max-height: calc(100vh - 120px);
 }
 
 .message-container {
-    margin-bottom: 15px;
+    display: flex;
+    width: 100%;
+    padding: 5px 0;
 }
 
 .bot-message {
-    margin-right: 70%;
+    align-self: flex-start;
+    max-width: 60%;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #e6e6e6;
+    font-size: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .user-message {
-    margin-left: 70%;
+    align-self: flex-end;
+    max-width: 60%;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #dcf8c6;
+    font-size: 15px;
     text-align: left;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .input-container {
     position: sticky;
     bottom: 0;
     width: 100%;
-    background-color: #fff;
+    background-color: white;
     border-top: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 input[type="text"] {
-    width: 80%;
+    flex-grow: 1;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.2s;
 }
-#employeeButton{
-    margin-left: 45px;
-    background-color: lightseagreen;
+
+input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
 }
 
 button {
     padding: 10px 15px;
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#employeeButton {
+    margin-left: 10px;
+    background-color: lightseagreen;
+}
+
+#employeeButton:hover {
+    background-color: #20a39e;
 }
