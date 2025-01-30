@@ -20,7 +20,7 @@ function startTimer() {
 
 submitBtn.addEventListener("click", async function () {
     //send phone number to db
-    let userContent = phoneTextField.value + " " + customerNameField.value
+    let userContent = "User Phone Number: " + phoneTextField.value + " Customer Name: " + customerNameField.value
     fetch(`http://localhost:8080/createMessage/`,{
         method: "POST",
         body: JSON.stringify({
