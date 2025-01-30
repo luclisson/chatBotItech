@@ -1,11 +1,6 @@
 // html elements
 const submidBtn = document.getElementById("supply-button");
 const textField  = document.getElementById("text-field");
-const checkBox = document.getElementById("check-box");
-//default values
-let micActive = false;
-
-
 //functions
 function fetchCreateMessage(message,author,type){
     fetch(`http://localhost:8080/createMessage/`,{
@@ -104,10 +99,4 @@ submidBtn.addEventListener("click", function () {
         textField.value = "";
         textField.placeholder = "please enter a valid serial number";
     }
-})
-
-checkBox.addEventListener("change", function () {
-    micActive = !micActive;
-    console.log(`micActive changed to ${micActive}`);
-    //send api call to get mic input
 })

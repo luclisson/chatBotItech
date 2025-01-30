@@ -1,14 +1,15 @@
 package com.challenge.chatBot;
 import com.challenge.chatBot.message.Message;
 import com.challenge.chatBot.message.jpa.MessageJpaRepository;
-
-import java.util.Arrays;
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -18,10 +19,13 @@ import java.net.URI;
 
 @RestController
 public class FrontendController {
+    private static final Logger log = LoggerFactory.getLogger(FrontendController.class);
     @Autowired
     MessageJpaRepository messageJpaRepository;
     @Autowired
     OpenAiChatModel openAiChatModel;
+    @Autowired
+    MailSenderService mailSenderService;
     @PostMapping(path = "/createMessage/")
     //return json of created message + remove ResponseEntity
     public ResponseEntity<Message> createMessage(@RequestBody Message message) {
@@ -33,6 +37,10 @@ public class FrontendController {
     @GetMapping(path = "/redirectToMessenger")
     public RedirectView redirectToMessager() {
         return new RedirectView("/messenger.html");
+    }
+    @GetMapping(path= "/redirectToWaitingRoom")
+    public RedirectView redirectToWaitingRoom() {
+        return new RedirectView("/waitingroom.html");
     }
 
     @GetMapping(path = "/messages/{id}")
@@ -63,6 +71,7 @@ public class FrontendController {
         ChatResponse response = openAiChatModel.call(prompt);
         return response.getResult().getOutput().getContent();
     }
+
     @GetMapping(path = "/getSummary")
     public String getSummary() {
         List<Message> allMessages = messageJpaRepository.retrieveAllEntities();
@@ -70,12 +79,16 @@ public class FrontendController {
                 write a summary for a future employee in the following format:
                 Bot: "bot"\s
                 Serial number: "serial number"\s
+                Customer Name: "customer name"\s
+                User Phone Number: "phone number"\s
                 Problem: "summarize both the messages and what provided solutions didn't work 
                 (you will find material for the summary below in json like format)"
                 """;
 
         Prompt  prompt = new Prompt(request + allMessages);
         ChatResponse response = openAiChatModel.call(prompt);
+        //send mail to employee
+        mailSenderService.sendEmail("lisson.luc@gmail.com","Unsolved problem from chatbot", response.getResult().getOutput().getContent());
         return response.getResult().getOutput().getContent();
     }
 }

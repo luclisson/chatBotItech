@@ -54,7 +54,6 @@ function createMessage(message,author, type) {
     fetch(`http://localhost:8080/createMessage/`,{
         method: "POST",
         body: JSON.stringify({
-            //"id": id,
             "message": message,
             "author": author,
             "type": type
@@ -89,14 +88,16 @@ sendBtn.addEventListener("click", async function () {
     createMessage(chatBotResponse, "chatBot", "default");
 })
 humanSupportBtn.addEventListener("click", async function () {
-    console.log("human support");
-    let summary = await fetch(`http://localhost:8080/getSummary`, {
-        method: "GET"
-    }).then(response => {
-        return response.text();
-    })
-    console.log(summary);
-    //create text doc with summary (pdf would be cleaner)
-    //send this doc to a free employee
     //redirect to end page and waiting time countdown
+    fetch(`http://localhost:8080/redirectToWaitingRoom`, {
+        redirect: 'follow',
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = response.url;
+        }else{
+            console.error("Request failed with status:", response.status);
+        }
+    }).catch(error =>{
+        console.error("Error during fetch:", error);
+    });
 })
