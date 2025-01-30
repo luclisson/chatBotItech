@@ -36,11 +36,11 @@ public class FrontendController {
 
     @GetMapping(path = "/redirectToMessenger")
     public RedirectView redirectToMessager() {
-        return new RedirectView("/messenger.html");
+        return new RedirectView("/messenger/messenger.html");
     }
     @GetMapping(path= "/redirectToWaitingRoom")
     public RedirectView redirectToWaitingRoom() {
-        return new RedirectView("/waitingroom.html");
+        return new RedirectView("/employeeContact/waitingroom.html");
     }
 
     @GetMapping(path = "/messages/{id}")
@@ -79,8 +79,8 @@ public class FrontendController {
                 write a summary for a future employee in the following format:
                 Bot: "bot"\s
                 Serial number: "serial number"\s
-                Customer Name: "customer name"\s
-                User Phone Number: "phone number"\s
+                Customer Name: "customer name"(you will find these information in the object with the type userInformation)\s
+                User Phone Number: "phone number"(you will find these information in the object with the type userInformation)\s
                 Problem: "summarize both the messages and what provided solutions didn't work 
                 (you will find material for the summary below in json like format)"
                 """;
