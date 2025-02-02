@@ -1,3 +1,11 @@
+### How to use
+- clone the repo
+- localhost port 587 and 8080 must be accessable
+- enter a valid serial number (has to include lower case, uppercase and 01-06 ending)
+- you need a working jdk ver 17
+- you need a working maven version
+- there is no build jar, so you have to run the code in a ide such as IntelliJ or Visual Studio Code
+
 
 ## Must Have
 - The chatbot is meaningfully integrated into the service level process
@@ -6,19 +14,19 @@
 - The technological approach or background of the chatbot used can be explained.
   (should be feasible)
 - The integration possibilities of the chatbot used in an existing technical system can be explained.
-- Parts of the source code are presented as pseudocode (control structures such as loops and branches).
-  (not done)
+- Parts of the source code are presented as pseudocode. (done)
+  
 
 ## Should Have
-- The chatbot redirects to an employee or provides alternative contact details if a request is not successfully resolved.(in progress)
+- The chatbot redirects to an employee or provides alternative contact details if a request is not successfully resolved.(done)
 - The chatbot used was compared with competitors and the advantages and disadvantages of one or two competitors can be explained.
-  (done but needs to be written down)
+  (done)
 
 ## Could Have
 - Ensuring the quality of the integration of the chatbot used can be explained by a test strategy.
   (ask frank)
 - A concept for storing chat histories is presented and implemented if necessary.
-  (db)
+  (done)
 
 ### different bots (in german atm...)
 
