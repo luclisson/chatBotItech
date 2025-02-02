@@ -54,5 +54,4 @@
    - **Funktion:** Analysiert und optimiert interne Support-Prozesse, um die Bearbeitungszeiten zu verkürzen und klare Abläufe zu schaffen.  
    - **Persönlichkeit:** Logisch und lösungsorientiert.  
 
-Soll ich die Funktionen anpassen oder brauchst du noch weitere Ideen? 😊
 
